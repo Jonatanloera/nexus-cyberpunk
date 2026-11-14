@@ -148,8 +148,7 @@ function traffic(): string {
 }
 
 // El holograma NEXUS: anillos de nodos girando y el nombre con glitch.
-function hologram(): string {
-  const cx = 1180
+function hologram(cx: number): string {
   const cy = 215
   const nodes: string[] = []
   for (let i = 0; i < 6; i++) {
@@ -188,8 +187,9 @@ function hologram(): string {
   )
 }
 
-export const SCENE: string =
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">` +
+// La escena entera, o un recorte (`viewBox`) a un tamaño fijo para el panel.
+const svg = (open: string, holoX: number): string =>
+  open +
   `<defs>` +
   `<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">` +
   `<stop offset="0" stop-color="${C.void}"/><stop offset="0.45" stop-color="${C.night}"/>` +
@@ -218,7 +218,7 @@ export const SCENE: string =
   // Ciudad: capa lejana y capa cercana; el holograma flota delante.
   `<g opacity="0.9">${skyline(11, C.farCity, 140, 420, 0.18, false)}</g>` +
   `<g>${skyline(29, C.nearCity, 90, 330, 0.12, true)}</g>` +
-  hologram() +
+  hologram(holoX) +
   // Suelo con rejilla de neón.
   `<rect x="0" y="${HORIZON}" width="${W}" height="${H - HORIZON}" fill="url(#floor)"/>` +
   `<g clip-path="url(#floorClip)" stroke="url(#gridFade)" stroke-width="1.5" opacity="0.7">${grid()}</g>` +
@@ -229,3 +229,15 @@ export const SCENE: string =
   `<rect width="${W}" height="${H}" fill="url(#scan)" opacity="0.35"/>` +
   `<rect width="${W}" height="${H}" fill="url(#vignette)"/>` +
   `</svg>`
+
+// Fondo de ventana completa: llena el hueco recortando lo que sobre.
+export const SCENE: string = svg(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">`,
+  1180,
+)
+
+// Panel lateral: un recorte vertical centrado en el holograma y la rejilla.
+export const PANEL_SCENE: string = svg(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="400 0 800 ${H}" width="800" height="${H}" preserveAspectRatio="xMidYMid slice">`,
+  800,
+)

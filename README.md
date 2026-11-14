@@ -34,6 +34,12 @@ El tema se activa solo al iniciar cada sesión.
 
 Si lo apagas, sigue apagado en las siguientes sesiones hasta que lo enciendas otra vez.
 
+¿Tu app todavía no dibuja fondos de mods? Abre la ciudad en un panel lateral:
+
+```
+/nexus-panel
+```
+
 ## Archivos
 
 - `hooks/scene.ts` — la escena SVG animada (colores en el objeto `C`).
