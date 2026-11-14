@@ -1,0 +1,6 @@
+{
+  "name": "nexus-cyberpunk",
+  "description": "Tema cyberpunk NEXUS para Claude Code desktop",
+  "owner": { "name": "Jonatanloera" },
+  "plugins": [{ "name": "nexus-cyberpunk", "source": "./" }]
+}
